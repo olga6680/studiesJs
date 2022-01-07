@@ -62,14 +62,15 @@ const personalMovieDB = {
                             personalMovieDB.genres[i-1] = genre;
                             } */
 
-            let genres = promt('Введите ваши любимые жанры через запятую');
+            let genres = promt('Введите ваши любимые жанры через запятую').toLowerCase(); //альтернативная запись. Более лучшая
 
             if (genres == '' || nill) {
                 console.log('Вы ввели некорректные данные');
                 i--;
             } else {
                 personalMovieDB.genres = genres.split(', ');
-                personalMovieDB.genres = genres.sort();
+                personalMovieDB.genres = genres.sort(); //При сортировке, буквы в верхнем регистре в приоритете перед алфавитом
+                //Поэтому для правильной сортировки переводим ответ в один регистр, маленький например toLowerCase()
             }
         }
 
