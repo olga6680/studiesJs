@@ -225,7 +225,8 @@ function compareNum(a, b) {
     return a - b;
 }
 
-//Копии объектов
+/***************/
+//КОПИИ ОБЪЕКТОВ
 
 /* let a = 5,
     b = a;
@@ -268,7 +269,121 @@ const numbers = {
 
 const newNumbers = copy(numbers);
 
-newNumbers.a = 10;
+newNumbers.a = 10; //Поверхностная копия
+newNumbers.c.x = 10; //Это на самом деле копируется ссылка, а не объект. Потому что вложенность. Глубокая копия
 
-console.log(newNumbers);
-console.log(numbers);
+/* console.log(newNumbers);
+console.log(numbers); */
+
+//assign В имеющийся объект помещает несколько вложенных
+
+const add = {
+    d: 17,
+    e: 20
+};
+
+/* console.log(Object.assign(numbers, add));  //1-тот, в который помещают, 2- тот, что помещают
+console.log(Object.assign({}, add));  //Cоздастся отдельная копия */
+
+const clone = Object.assign({}, add);
+
+clone.d = 20;
+
+/* console.log(add);
+console.log(clone); */
+
+//Копия массива
+const oldArray = ['a', 'b', 'c'];
+const newArray = oldArray.slice();
+
+newArray[1] = 'jhs';
+console.log(newArray);
+console.log(oldArray);
+
+//Копия с помощью метода разворота
+const video = ['youtube', 'vimeo', 'rutube'],
+    blogs = ['wordpress', 'livejournal', 'blogger'],
+    internet = [...video, ...blogs, 'vk', 'facebook'];
+
+console.log(internet);
+
+function log(a, b, c) {
+    console.log(a);
+    console.log(b);
+    console.log(c);
+}
+
+const num = [2, 5, 7]; //данные с сервера какие-то. Например: 1 -ссылка на источник, 2 -ссылка на картинку, 3-ссылка на автора
+
+log(...num); //Массив разложится на 3 отдельных элемента
+
+//Копия с помощью спрет оператора
+const array = ["a", "b"];
+
+const newArray = [...array];
+
+const q = {
+    one: 1,
+    two: 2
+};
+
+const newObj = {...q };
+
+
+/***************/
+//ПРОТОТИПНО-ОРИЕНТИРОВОЧНОЕ НАСЛЕДОВАНИЕ ООП
+
+let str = "some";
+let strObj = new String(str);
+
+console.log(typeof(str));
+console.log(typeof(strObj));
+
+//Пример про солдата со здоровьем и силой
+/*
+const soldier = {   //Все солдаты - прототип
+  health: 400,     //Здоровье
+  armor: 100        //Сила
+};
+
+const jonh = {    //Отдельный солдат Джон
+  health: 100     //Слаб здоровьем
+};
+
+jonh.__proto__ = soldier;  //Наследует силу у прототипа солдат (Устаревшая запись уже не используется)
+
+console.log(jonh.armor); */
+
+//А если задать прототипу функцию, то она появится и у джона
+
+/* const soldier = {
+  health: 400,
+  armor: 100,
+  seyHello: function() {
+    console.log("hello");
+  }
+};
+
+const jonh = {
+  health: 100
+};
+
+//jonh.__proto__ = soldier;
+
+Object.setPrototypeOf(jonh, soldier);  //вместо устаревшей записи
+
+jonh.sayHello(); */
+
+//Все это правильнее записать
+
+const soldier = {
+    health: 400,
+    armor: 100,
+    seyHello: function() {
+        console.log("hello");
+    }
+};
+
+const jonh = Object.create(soldier);
+
+jonh.seyHello();
