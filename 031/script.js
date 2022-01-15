@@ -29,11 +29,21 @@ window.addEventListener('DOMcontentLoaded', () => {
     });
 
     // Свойства event (e)
-    // touches  //показывает сколько всего пальцев на экране
+    // touches  показывает сколько всего пальцев на экране
 
     box.addEventListener('touchmove', (e) => {
         e.preventDefault();
 
         console.log('Move');
+        console.log(e.touches);
+    });
+
+    // targetTouches  показывает сколько всего пальцев на этом элементе
+    // changedTouches  список пальцев, которые учавствуют в событии (даже палец, который был убран)
+
+    box.addEventListener('touchmove', (e) => {
+        e.preventDefault();
+
+        console.log(e.targetTouches[0].pageX); // Пример: по первому пальцу находим координаты передвижения
     });
 });
