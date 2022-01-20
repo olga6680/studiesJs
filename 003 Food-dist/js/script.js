@@ -92,4 +92,66 @@ window.addEventListener('DOMContentLoaded', () => {
     }
 
     setClock('.timer', deadline);
+
+    //Modal
+
+    const modalTrigger = document.querySelectorAll('[data-modal]'),
+        modal = document.querySelector('.modal'),
+        modalCloseBtn = document.querySelector('[data-close]');
+
+
+    modalTrigger.forEach(btn => { //для нескольких кнопок на странице
+        btn.addEventListener('click', () => {
+            modal.classList.toggle('show');
+            document.body.style.overflow = 'hidden';
+        });
+    });
+
+    //Это для одной кнопки на странице querySelector
+    /*     modalTrigger.addEventListener('click', () => {
+                    //modal.classList.add('show');
+                   // modal.classList.remove('hide');
+            //добавляем модальному окну стиль hide в index.html, подразумевая, что изначально оно скрыто
+            //modal.classList.toggle('hide');
+            //ничего не происходит. Убираем класс в index.html modal.hide
+            modal.classList.toggle('show');
+
+            document.body.style.overflow = 'hidden'; //чтобы страница не пролистывалась, когда открыто модальное окно
+        }); */
+
+    function closeModal() { //Если код повторяется хотябы 2 раза, выносим его в отдельную функцию
+        modal.classList.toggle('show');
+        document.body.style.overflow = '';
+    }
+    /*
+        modalCloseBtn.addEventListener('click', () => {
+            /*         modal.classList.add('hide');
+                    modal.classList.remove('show');
+            //modal.classList.toggle('hide');
+            modal.classList.toggle('show');
+            document.body.style.overflow = ''; //Возвращаем прокрутку страницы при закрытии модального окна
+        });*/
+
+    modalCloseBtn.addEventListener('click', closeModal);
+
+    //закрытие окна при клике на подложку или на клавишу esc
+
+    /*modal.addEventListener('click', (e) => {
+        if (e.target == modal) {
+            modal.classList.toggle('show');
+            document.body.style.overflow = '';
+        }
+    }); */
+
+    modal.addEventListener('click', (e) => {
+        if (e.target == modal) {
+            closeModal();
+        }
+    });
+
+    document.addEventListener('keydown', (e) => { // esc
+        if (e.code == "Escape" && modal.classList.contains('show')) { //найти event.code для клавиш можно в гугл
+            closeModal();
+        }
+    });
 });
