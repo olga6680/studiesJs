@@ -29,7 +29,7 @@ const long = new Rectangle(20, 100);
 console.log(square.calcArea());
 console.log(long.calcArea()); */
 
-const div = ColoredRectangleWithText(25, 10, 'Hello World', 'red');
+const div = new ColoredRectangleWithText(25, 10, 'Hello World', 'red');
 
 div.showMyProps();
 console.log(div.calcArea());
