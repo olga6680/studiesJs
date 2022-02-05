@@ -44,21 +44,22 @@ if (btns[2].classList.contains('red')) {   //Проверяет, есть ли �
 const btns = document.querySelectorAll('button'),
     wrapper = document.querySelector('.btn-block');
 
-/* wrapper.addEventListener('click', (event) => {
-    if (event.target && event.target.tagName == "BUTTON") { //В этом свойстве тег нэйм всегда большими буквами
+wrapper.addEventListener('click', (event) => {
+    //if (event.target && event.target.tagName == "BUTTON") { //В этом свойстве тег нэйм всегда большими буквами
+    if (event.target && event.target.matches("button.red")) { //Это более продвинутое делигирование, которое любит google. Сравнение с определенным элементом matches("button.red")
         console.log("Hello");
     }
     /*     if (event.target && event.target.classList.contains('blue')) { //В этом свойстве тег нэйм всегда большими буквами
             console.log("Hello");
         } */
 
-//});
+});
 
-btns.forEach(btn => {
+/* btns.forEach(btn => {                         //Если мы попробуем задать эти же действия с помощью метода перебора, новый созданный элемент не будет реагировать. Поэтому лучше использовать делигирование
     btn.addEventListener('click', () => {
         console.log('Hello');
     });
-});
+}); */
 
 const btn = document.createElement('button'); //добавляем элемент
 btn.classList.add('red'); //Задаем ему класс
